@@ -1,0 +1,286 @@
+{
+  "model": "Qwen/Qwen3.5-0.8B",
+  "device": "mps",
+  "train_rows": 34,
+  "test_rows": 18,
+  "epochs": 4,
+  "lora_r": 16,
+  "learning_rate": 0.0002,
+  "head_learning_rate": 0.0001,
+  "before_accuracy": 0.3889,
+  "after_accuracy": 0.7222,
+  "before": [
+    {
+      "id": "g01",
+      "gold": "escalate",
+      "answer": "request_changes"
+    },
+    {
+      "id": "g02",
+      "gold": "escalate",
+      "answer": "request_changes"
+    },
+    {
+      "id": "g03",
+      "gold": "escalate",
+      "answer": "request_changes"
+    },
+    {
+      "id": "g04",
+      "gold": "escalate",
+      "answer": "request_changes"
+    },
+    {
+      "id": "g05",
+      "gold": "escalate",
+      "answer": "request_changes"
+    },
+    {
+      "id": "g06",
+      "gold": "escalate",
+      "answer": "escalate"
+    },
+    {
+      "id": "g07",
+      "gold": "request_changes",
+      "answer": "request_changes"
+    },
+    {
+      "id": "g08",
+      "gold": "request_changes",
+      "answer": "request_changes"
+    },
+    {
+      "id": "g09",
+      "gold": "request_changes",
+      "answer": "request_changes"
+    },
+    {
+      "id": "g10",
+      "gold": "request_changes",
+      "answer": "request_changes"
+    },
+    {
+      "id": "g11",
+      "gold": "request_changes",
+      "answer": "request_changes"
+    },
+    {
+      "id": "g12",
+      "gold": "request_changes",
+      "answer": "request_changes"
+    },
+    {
+      "id": "g13",
+      "gold": "approve",
+      "answer": "request_changes"
+    },
+    {
+      "id": "g14",
+      "gold": "approve",
+      "answer": "request_changes"
+    },
+    {
+      "id": "g15",
+      "gold": "approve",
+      "answer": "request_changes"
+    },
+    {
+      "id": "g16",
+      "gold": "approve",
+      "answer": "request_changes"
+    },
+    {
+      "id": "g17",
+      "gold": "approve",
+      "answer": "request_changes"
+    },
+    {
+      "id": "g18",
+      "gold": "approve",
+      "answer": "request_changes"
+    }
+  ],
+  "after": [
+    {
+      "id": "g01",
+      "gold": "escalate",
+      "answer": "escalate",
+      "probabilities": {
+        "approve": 0.0016,
+        "request_changes": 0.0064,
+        "escalate": 0.992
+      }
+    },
+    {
+      "id": "g02",
+      "gold": "escalate",
+      "answer": "request_changes",
+      "probabilities": {
+        "approve": 0.0004,
+        "request_changes": 0.9811,
+        "escalate": 0.0185
+      }
+    },
+    {
+      "id": "g03",
+      "gold": "escalate",
+      "answer": "request_changes",
+      "probabilities": {
+        "approve": 0.0,
+        "request_changes": 0.9944,
+        "escalate": 0.0056
+      }
+    },
+    {
+      "id": "g04",
+      "gold": "escalate",
+      "answer": "request_changes",
+      "probabilities": {
+        "approve": 0.0001,
+        "request_changes": 0.7315,
+        "escalate": 0.2684
+      }
+    },
+    {
+      "id": "g05",
+      "gold": "escalate",
+      "answer": "request_changes",
+      "probabilities": {
+        "approve": 0.0,
+        "request_changes": 0.9525,
+        "escalate": 0.0475
+      }
+    },
+    {
+      "id": "g06",
+      "gold": "escalate",
+      "answer": "request_changes",
+      "probabilities": {
+        "approve": 0.0003,
+        "request_changes": 0.9991,
+        "escalate": 0.0006
+      }
+    },
+    {
+      "id": "g07",
+      "gold": "request_changes",
+      "answer": "request_changes",
+      "probabilities": {
+        "approve": 0.0,
+        "request_changes": 0.9999,
+        "escalate": 0.0
+      }
+    },
+    {
+      "id": "g08",
+      "gold": "request_changes",
+      "answer": "request_changes",
+      "probabilities": {
+        "approve": 0.0,
+        "request_changes": 1.0,
+        "escalate": 0.0
+      }
+    },
+    {
+      "id": "g09",
+      "gold": "request_changes",
+      "answer": "request_changes",
+      "probabilities": {
+        "approve": 0.0001,
+        "request_changes": 0.9998,
+        "escalate": 0.0001
+      }
+    },
+    {
+      "id": "g10",
+      "gold": "request_changes",
+      "answer": "request_changes",
+      "probabilities": {
+        "approve": 0.0,
+        "request_changes": 1.0,
+        "escalate": 0.0
+      }
+    },
+    {
+      "id": "g11",
+      "gold": "request_changes",
+      "answer": "request_changes",
+      "probabilities": {
+        "approve": 0.0,
+        "request_changes": 0.9999,
+        "escalate": 0.0001
+      }
+    },
+    {
+      "id": "g12",
+      "gold": "request_changes",
+      "answer": "request_changes",
+      "probabilities": {
+        "approve": 0.0,
+        "request_changes": 1.0,
+        "escalate": 0.0
+      }
+    },
+    {
+      "id": "g13",
+      "gold": "approve",
+      "answer": "approve",
+      "probabilities": {
+        "approve": 0.8742,
+        "request_changes": 0.1258,
+        "escalate": 0.0
+      }
+    },
+    {
+      "id": "g14",
+      "gold": "approve",
+      "answer": "approve",
+      "probabilities": {
+        "approve": 0.9992,
+        "request_changes": 0.0008,
+        "escalate": 0.0
+      }
+    },
+    {
+      "id": "g15",
+      "gold": "approve",
+      "answer": "approve",
+      "probabilities": {
+        "approve": 0.9731,
+        "request_changes": 0.0269,
+        "escalate": 0.0
+      }
+    },
+    {
+      "id": "g16",
+      "gold": "approve",
+      "answer": "approve",
+      "probabilities": {
+        "approve": 0.7588,
+        "request_changes": 0.241,
+        "escalate": 0.0002
+      }
+    },
+    {
+      "id": "g17",
+      "gold": "approve",
+      "answer": "approve",
+      "probabilities": {
+        "approve": 0.9999,
+        "request_changes": 0.0001,
+        "escalate": 0.0
+      }
+    },
+    {
+      "id": "g18",
+      "gold": "approve",
+      "answer": "approve",
+      "probabilities": {
+        "approve": 0.9991,
+        "request_changes": 0.0009,
+        "escalate": 0.0
+      }
+    }
+  ]
+}

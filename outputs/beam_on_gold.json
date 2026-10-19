@@ -1,0 +1,24 @@
+{
+  "correct": 15,
+  "n": 18,
+  "labels": {
+    "g01": "escalate",
+    "g02": "escalate",
+    "g03": "escalate",
+    "g04": "escalate",
+    "g05": "escalate",
+    "g06": "request_changes",
+    "g07": "request_changes",
+    "g08": "request_changes",
+    "g09": "request_changes",
+    "g10": "request_changes",
+    "g11": "escalate",
+    "g12": "request_changes",
+    "g13": "approve",
+    "g14": "approve",
+    "g15": "approve",
+    "g16": "approve",
+    "g17": "approve",
+    "g18": "request_changes"
+  }
+}

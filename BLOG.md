@@ -4,7 +4,7 @@
 
 # Beam labels. A 0.8B model decides.
 
-**The training run has not been started. This repository is the plan.**
+**Beam Free labeled the training rows. Qwen3.5-0.8B, with a rank-16 LoRA and a 3-way head, was trained on this Mac. The frozen test is 18 diffs.**
 
 **A 501B teacher writes closed labels. Qwen3.5-0.8B learns to score those options and return a probability. The small model never has to write the reply.**
 
@@ -16,7 +16,22 @@ A router, a guardrail, or a ticket desk does the same job all day. Read a state.
 
 That job does not need a 501B model on the hot path. It needs a small model that has seen *your* decisions. [Reflection Beam](https://huggingface.co/reflection/Beam-1.0-501B-A23B) is the teacher. [Qwen3.5-0.8B](https://unsloth.ai/docs/basics/train-your-own-decision-model-with-unsloth) is the student. Beam reads the hard cases once. The 0.8B model answers them after that.
 
-This post is the plan for that lab. The accuracy table further down is Unsloth’s published run on public sets. It is not a number from this repository.
+Same 18 frozen diffs. The trainer never saw them. n=18 is a lab, not a benchmark.
+
+| Check | Base Qwen3.5-0.8B | After LoRA + head |
+| --- | ---: | ---: |
+| Gold test | 7 / 18 | **13 / 18** |
+| `approve` | 0 / 6 | **6 / 6** |
+| `request_changes` | 6 / 6 | **6 / 6** |
+| `escalate` | 1 / 6 | 1 / 6 |
+
+The base model scored each option by the label token it preferred, and it answered `request_changes` on 16 of the 18 diffs. Training moved `approve` from 0 / 6 to 6 / 6. It did not move `escalate`. Those five misses are still called `request_changes`.
+
+Beam, on one pass over the same 18 diffs, matched the gold label on **15 / 18**. The student did not catch up to the teacher on the security class. The training file had 9 `escalate` rows, 11 `approve`, and 14 `request_changes`, after two Beam passes agreed on 34 of 36 states and the other 2 were dropped.
+
+Full rows: [`outputs/results.json`](outputs/results.json). Adapter: [`outputs/adapter`](outputs/adapter).
+
+---
 
 ---
 
@@ -113,23 +128,17 @@ Beam’s reasoning channel stays out of the target. So does any confidence numbe
 
 ---
 
-## The training pass, when it is run
+## The run
 
-The notebook to start from is Unsloth’s [Qwen3.5 decision notebook](https://colab.research.google.com/github/unslothai/notebooks/blob/main/nb/Qwen3_5_(4B)-Decision.ipynb). Change the model name to `unsloth/Qwen3.5-0.8B` for the first run. A free Colab T4 covers the 4 GB budget.
+Unsloth’s decision trainer is a CUDA notebook. This machine is an Apple M2 Pro, so the same idea is a small script: [`src/train.py`](src/train.py). It loads [`Qwen/Qwen3.5-0.8B`](https://huggingface.co/Qwen/Qwen3.5-0.8B), leaves the vision tower on CPU, and puts a rank-16 LoRA on the text attention projections (`q_proj`, `k_proj`, `v_proj`, `o_proj`). A new linear head reads the last hidden state and scores `approve`, `request_changes`, and `escalate`. fp16 training on MPS produced NaN hidden states, so this run is float32.
 
-The loop, once the JSONL exists:
+```bash
+python src/label_beam.py
+PYTORCH_ENABLE_MPS_FALLBACK=1 python src/train.py
+```
 
-1. Score the untouched 0.8B model on the human slice. That is the before number.
-2. LoRA-train the decision head on the gold rows plus the Beam rows that survived the agreement filter.
-3. Calibrate on the human slice.
-4. Score the same slice again. Publish that pair, and no other accuracy claim.
+`label_beam.py` calls OpenCode’s `opencode/beam-free` twice. A row is kept only when both labels match. `train.py` writes `outputs/results.json` and `outputs/adapter`.
 
-A new ticket is one call. The model returns the option key and a probability for every option. Code applies the threshold you wrote down.
+Four epochs, batch size 2, LoRA learning rate 2e-4, head learning rate 1e-4. Train loss went from 1.47 to 0.19. The gold file was not in that loss.
 
----
-
-## What this draft is not
-
-There is no adapter in this folder. There is no measured before/after on a real repository. The 78% figure belongs to Unsloth’s public mix, and this post cites it as theirs.
-
-The next concrete piece of work is the question schema and the 100-row human slice. Beam labeling comes after that slice says the teacher is worth copying.
+The 78% figure earlier in this post is still Unsloth’s number on a public mix. The number from this repository is 7 / 18 to 13 / 18 on these diffs, and the `escalate` class did not move.

@@ -1,0 +1,18 @@
+{"id": "g01", "state": "The commit adds .env, and that file contains DATABASE_URL with a database password.", "gold": {"review": "escalate"}}
+{"id": "g02", "state": "require_admin becomes `if user.role == \"admin\" or True:`.", "gold": {"review": "escalate"}}
+{"id": "g03", "state": "Every POST /cleanup calls shutil.rmtree on the customer uploads directory.", "gold": {"review": "escalate"}}
+{"id": "g04", "state": "The bank callback uses requests.get(url, verify=False).", "gold": {"review": "escalate"}}
+{"id": "g05", "state": "The new trace line prints the Authorization header of the incoming request.", "gold": {"review": "escalate"}}
+{"id": "g06", "state": "The calculator route passes request.form['expr'] to eval.", "gold": {"review": "escalate"}}
+{"id": "g07", "state": "A new sales-tax function is added. The pull request contains no test for it.", "gold": {"review": "request_changes"}}
+{"id": "g08", "state": "The code returns the price in cents. The test still expects euros and was not updated.", "gold": {"review": "request_changes"}}
+{"id": "g09", "state": "The HTTP timeout is set to 0, and a timeout is treated as a successful charge.", "gold": {"review": "request_changes"}}
+{"id": "g10", "state": "Email dedupe compares strings without case folding. The reported bug was Case@x.com versus case@x.com.", "gold": {"review": "request_changes"}}
+{"id": "g11", "state": "The webhook returns HTTP 200 before the signature check runs.", "gold": {"review": "request_changes"}}
+{"id": "g12", "state": "Search compiles the raw query as a regular expression and does not escape it. No test was added.", "gold": {"review": "request_changes"}}
+{"id": "g13", "state": "getUser is renamed to get_user. The existing tests pass.", "gold": {"review": "approve"}}
+{"id": "g14", "state": "A test is added for the empty-cart total the function already returns. No production code changed.", "gold": {"review": "approve"}}
+{"id": "g15", "state": "A comment typo, \"recieve\", is corrected to \"receive\". No code path changed.", "gold": {"review": "approve"}}
+{"id": "g16", "state": "The only file in the diff is CHANGELOG.md, noting a release that is already deployed.", "gold": {"review": "approve"}}
+{"id": "g17", "state": "A local literal already covered by tests is moved to a named constant. The tests pass.", "gold": {"review": "approve"}}
+{"id": "g18", "state": "A branch the coverage report marks unreachable is deleted. The suite still passes.", "gold": {"review": "approve"}}
